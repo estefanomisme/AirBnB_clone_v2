@@ -21,27 +21,27 @@ def do_pack():
         filename = "versions/web_static_{}.tgz".format(date)
         local("tar -cvzf {} web_static".format(filename))
         return filename
-    except:
+    except Exception as ex:
         return None
 
 
-def def do_deploy(archive_path):
+def do_deploy(archive_path):
     """distributes an archive to two web servers"""
     if not exists(archive_path):
         return False
     try:
         filename = archive_path.split("/")[-1]
-        file_noext = filename.split(".")[0]
+        f_noext = filename.split(".")[0]
         path = "/data/web_static/releases/"
 
         put(archive_path, "/tmp/")
-        run('sudo mkdir -p {}{}/'.format(path, file_noext))
-        run('sudo tar -xzf /tmp/{} -C {}{}/'.format(filename, path, file_noext))
+        run('sudo mkdir -p {}{}/'.format(path, f_noext))
+        run('sudo tar -xzf /tmp/{} -C {}{}/'.format(filename, path, f_noext))
         run('sudo rm /tmp/{}'.format(filename))
-        run('sudo mv {0}{1}/web_static/* {0}{1}/'.format(path, file_noext))
-        run('sudo rm -rf {}{}/web_static'.format(path, file_noext))
+        run('sudo mv {0}{1}/web_static/* {0}{1}/'.format(path, f_noext))
+        run('sudo rm -rf {}{}/web_static'.format(path, f_noext))
         run('sudo rm -rf /data/web_static/current')
-        run('sudo ln -s {}{}/ /data/web_static/current'.format(path, file_noext))
+        run('sudo ln -s {}{}/ /data/web_static/current'.format(path, f_noext))
         return True
     except BaseException:
         return False
