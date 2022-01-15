@@ -77,7 +77,7 @@ def local_clean(number, directory):
             elif counter >= number:
                 local("rm {}/{}".format(directory, q_file))
             else:
-                counter += 1;
+                counter += 1
         except ValueError:
             local("rm {}/{}".format(directory, q_file))
             continue
@@ -89,8 +89,8 @@ def remote_clean(number, directory):
     counter = 0
     for q_file in cmnd:
         try:
-            typefile = run("file {}/{} | cut -d : -f2".format(directory, q_file))
-            if typefile != 'directory':
+            typefl = run("file {}/{} | cut -d : -f2".format(directory, q_file))
+            if typefl != 'directory':
                 run("rm {}/{}".format(directory, q_file))
                 continue
             if q_file is 'test':
@@ -106,7 +106,7 @@ def remote_clean(number, directory):
                 run("rm -Rf {}/{}".format(directory, q_file))
                 continue
             else:
-                counter += 1;
+                counter += 1
         except ValueError:
             run("rm -Rf {}/{}".format(directory, q_file))
             continue
