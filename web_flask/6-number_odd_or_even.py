@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""6. Odd or even?"""
+"""6. Odd or even? - starts a Flask web application"""
 
 
 from flask import Flask, render_template

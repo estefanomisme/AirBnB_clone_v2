@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""4. Is it a number?"""
+"""4. Is it a number? - starts a Flask web application"""
 
 
 from flask import Flask

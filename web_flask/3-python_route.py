@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""3. Python is cool!"""
+"""3. Python is cool! - starts a Flask web application"""
 
 
 from flask import Flask

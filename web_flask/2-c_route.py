@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""2. C is fun!"""
+"""2. C is fun! - starts a Flask web application"""
 
 
 from flask import Flask

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""5. Number template"""
+"""5. Number template - starts a Flask web application"""
 
 
 from flask import Flask, render_template
