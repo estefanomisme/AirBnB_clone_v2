@@ -22,7 +22,7 @@ def HBNB():
 @app.route("/c/<text>", strict_slashes=False)
 def C_is_fun(text):
     """displays a text in '/c/<text>' depending on text"""
-    return f"C {(text).replace('_', ' ')}"
+    return "C {}".format((text).replace('_', ' '))
 
 
 if __name__ == "__main__":
