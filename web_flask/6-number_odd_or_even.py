@@ -24,20 +24,20 @@ def HBNB():
 @app.route("/c/<text>")
 def c_text(text):
     """displays a text in '/c/<text>'"""
-    return f"C {escape(text).replace('_', ' ')}"
+    return "C {}".format(escape(text).replace('_', ' '))
 
 
 @app.route("/python")
 @app.route("/python/<text>")
 def python_text(text='is cool'):
     """displays a text in '/python/<text>' with a default value"""
-    return f"Python {escape(text).replace('_', ' ')}"
+    return "Python {}".format(escape(text).replace('_', ' '))
 
 
 @app.route("/number/<int:n>")
 def number(n):
     """displays a number in '/number/<n>'"""
-    return f"{n} is a number"
+    return "{} is a number".format(n)
 
 
 @app.route("/number_template/<int:n>")
