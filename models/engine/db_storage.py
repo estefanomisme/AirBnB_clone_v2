@@ -33,11 +33,14 @@ class DBStorage:
         """Returns a dictionary from a database query"""
         clsDict = {}
         if cls:
-            lstobj = self.__session.query(eval(cls)).all()
-            for obj in lstobj:
-                clsname = type(obj).__name__
-                clsstr = "{}.{}".format(clsname, obj.id)
-                clsDict[clsstr] = obj
+            if cls in Base.__subclasses__():
+                lstobj = self.__session.query(cls).all()
+                for obj in lstobj:
+                    clsname = type(obj).__name__
+                    clsstr = "{}.{}".format(clsname, obj.id)
+                    clsDict[clsstr] = obj
+            else:
+                return None
         else:
             for sub_c in Base.__subclasses__():
                 table = self.__session.query(sub_c).all()

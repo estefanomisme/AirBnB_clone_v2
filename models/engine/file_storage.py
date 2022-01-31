@@ -1,6 +1,18 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
+from models.base_model import Base
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
+import unittest
+import models
+
+dictclass = {'Base': Base, 'Amenity': Amenity, 'City': City,
+             'Place': Place, 'Review': Review, 'State': State, 'User': User}
 
 
 class FileStorage:
@@ -13,7 +25,10 @@ class FileStorage:
         if cls:
             clsDict = {}
             for key, value in FileStorage.__objects.items():
-                if type(value) == cls:
+                if type(cls) == str:
+                    if type(value) == dictclass[cls]:
+                        clsDict[key] = value
+                elif type(value) == cls:
                     clsDict[key] = value
             return clsDict
         else:
@@ -61,3 +76,7 @@ class FileStorage:
         if obj is not None:
             nameobj = obj.to_dict()["__class__"]
             del FileStorage.__objects["{}.{}".format(nameobj, obj.id)]
+
+    def close():
+        """last reload before close the session"""
+        self.reload()
