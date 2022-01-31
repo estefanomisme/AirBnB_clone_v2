@@ -3,7 +3,6 @@
 
 
 from flask import Flask
-from markupsafe import escape
 
 app = Flask(__name__)
 
@@ -23,7 +22,7 @@ def HBNB():
 @app.route("/c/<text>", strict_slashes=False)
 def C_is_fun(text):
     """displays a text in '/c/<text>' depending on text"""
-    return f"C {escape(text).replace('_', ' ')}"
+    return f"C {(text).replace('_', ' ')}"
 
 
 if __name__ == "__main__":
