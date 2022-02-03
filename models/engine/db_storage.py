@@ -13,6 +13,8 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 import unittest
 import models
 
+dictclass = {'Base': Base, 'Amenity': Amenity, 'City': City,
+             'Place': Place, 'Review': Review, 'State': State, 'User': User}
 
 class DBStorage:
     """This class manages storage of hbnb models in MySQL format"""
@@ -33,8 +35,8 @@ class DBStorage:
         """Returns a dictionary from a database query"""
         clsDict = {}
         if cls:
-            if cls in Base.__subclasses__():
-                lstobj = self.__session.query(cls).all()
+            if cls in dictclass.keys() or cls in dictclass.values():
+                lstobj = self.__session.query(eval(cls)).all()
                 for obj in lstobj:
                     clsname = type(obj).__name__
                     clsstr = "{}.{}".format(clsname, obj.id)
@@ -42,7 +44,7 @@ class DBStorage:
             else:
                 return None
         else:
-            for sub_c in Base.__subclasses__():
+            for sub_c in dictclass.keys() or sub_c in dictclass.values():
                 table = self.__session.query(sub_c).all()
                 for obj in table:
                     key = "{}.{}".format(obj.__class__.__name__, obj.id)
